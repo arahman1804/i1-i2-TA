@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+	Machine Learning KNN
+{% endblock %}
+
+{% block body %}
+
+	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-success shadow-sm">
+		<span class="navbar-brand mb-0 h1">TA KNN</span>
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="/">Home</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/dataset">Dataset</a>
+			</li>
+		</ul>
+	</nav><br><br><br>
+	<div class="container">
+		<div class="alert alert-success" role="alert">
+			<h4 class="alert-heading">Sistem Pendukung Keputusan Kelayakan Seorang Mahasiswa Mengikuti Tasmi'</h4>
+			<p>Demo implementasi KNN</p>
+
+
+		</div>
+	</div>
+
+
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		{% for message in messages %}<br>
+			<div class="alert container alert-danger alert-dismissible fade show" role="alert">
+				<strong>{{message}}</strong>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		{% endfor %}
+	{% endif %}
+	{% endwith %}
+	<div class="container">
+		<div class="card">
+			<h5 class="card-header">K Nearest Neighbor</h5>
+			<div class="card-body">
+				<h6 class="card-title">Indikator Kelulusan Tasmi'</h6>
+				<form action="/" method="post">
+					<div class="form-row">
+						<div class="col">
+							<input type="number" min="1" class="form-control" placeholder="Membaca" name="membaca" aria-describedby="membacaHelpBlock">
+							<small id="membacaHelpBlock" class="form-text text-muted">Jumlah membaca dalam 1 periode</small>
+						</div>
+						<div class="col">
+							<input type="number" min="1" class="form-control" placeholder="Ziadah" name="ziadah" aria-describedby="ziadahHelpBlock">
+							<small id="ziadahHelpBlock" class="form-text text-muted">Jumlah ziadah dalam 1 periode</small>
+						</div>
+						<div class="col">
+							<input type="number" min="1" class="form-control" placeholder="Murajaah" name="murajaah" aria-describedby="murajaahHelpBlock">
+							<small id="murajaahHelpBlock" class="form-text text-muted">Jumlah murajaah dalam 1 periode</small>
+						</div>
+						<div class="col">
+							<input type="number" min="1" class="form-control" placeholder="Qiraah" name="qiraah" aria-describedby="qiraahHelpBlock">
+							<small id="qiraahHelpBlock" class="form-text text-muted">Nilai Qiraah</small>
+						</div>
+						<div class="col">
+							<input type="number" min="1" class="form-control" placeholder="Tajwid" name="tajwid" aria-describedby="tajwidHelpBlock">
+							<small id="tajwidHelpBlock" class="form-text text-muted">Nilai Tajwid</small>
+						</div>
+					</div><br>
+					<h6 class="card-title">Neighbors</h6>
+					<div class="form-row">
+						<div class="col-3">
+							<input type="number" min="1" max="22" class="form-control" placeholder="K" name="k" aria-describedby="KHelpBlock">
+							<small id="KHelpBlock" class="form-text text-muted">Jarak ke tetanggaan (K)</small>
+						</div>
+					</div>
+					<br>
+					<button type="submit" class="btn btn-primary" value="Submit">Hitung</button>
+				</form>
+
+			{{prediksi}}
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+{% endblock %}
